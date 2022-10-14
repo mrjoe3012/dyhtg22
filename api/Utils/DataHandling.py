@@ -1,4 +1,5 @@
 import sqlite3
+import Utils
 
 def get_security_logs(db_filename):
     query = "SELECT * FROM Security_Logs"
@@ -25,7 +26,7 @@ def get_heatmap_values(security_logs):
                         "Joseph Black Building": 0,
                         "Kelvin Building" :0
                         }
-    for tuple in get_security_logs("data/Data"):
+    for tuple in get_security_logs(Utils.DATABASE_FILENAME):
         if(tuple[2] in occurrence_dict.keys()):
             occurrence_dict[tuple[2]] += 1
 
