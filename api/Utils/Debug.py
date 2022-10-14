@@ -4,4 +4,4 @@ class Logger:
         self.enabled = True
     def log(self, text):
         if self.enabled:
-            print(text)
+            print("{0}: {1}".format(self.name, self.text))
