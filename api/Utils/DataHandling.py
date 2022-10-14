@@ -31,3 +31,9 @@ def get_heatmap_values(security_logs):
             occurrence_dict[tuple[2]] += 1
 
     return occurrence_dict
+
+def detect_security_breaches(security_logs):
+    # go through security logs
+    # find out when a building is visited out of hours
+    # return a mapping from student ids to breach=(building,hours_visited)
+    pass
