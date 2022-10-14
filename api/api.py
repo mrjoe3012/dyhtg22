@@ -10,3 +10,11 @@ def route_get_heatmap_data():
     # get heatmap values
     # return json of heatmap values
     return "<h1>Hello, not implemented</h1>"
+
+@app.route("/get-security-logs")
+def route_get_security_logs():
+    # TODO(gianmarco):
+    # get security logs
+    # encode to json
+    # return it
+    pass
