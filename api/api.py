@@ -3,10 +3,10 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route("/time")
-def get_current_time():
-    return {"time" : time.time()}
-
-@app.route("/")
-def hello_world():
-    return "<h1>Hello World</h1>\n<p>(this means that flask is working!)</p>"
+@app.route("/get-heatmap-data")
+def route_get_heatmap_data():
+    # gianmarco
+    # get security logs
+    # get heatmap values
+    # return json of heatmap values
+    return "<h1>Hello, not implemented</h1>"
