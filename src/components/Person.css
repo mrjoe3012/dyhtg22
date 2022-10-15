@@ -1,5 +1,17 @@
 .Person {
     display: grid;
+    grid-template-rows: 3fr 2fr;
+}
+
+.Mugshot {
+    aspect-ratio: 5 / 4;
+    background-image: url('../assets/mugs/mugshot_background.png');
+    background-size: contain;
+    position: relative;
+}
+
+.person-info {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 2fr;
 }
