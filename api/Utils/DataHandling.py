@@ -77,8 +77,8 @@ def time_check(time_open, time_log):
 # 2230 and 9
 def detect_security_breaches(security_logs):
     location_data = get_buildings(Utils.DATABASE_FILENAME)
-    print(location_data)
-    print(security_logs)
+    #print(location_data)
+    #print(security_logs)
 
     #building data ('Building Name', 'Geolocation', 'Opening Times', 'Description')
     #security logs ("Student ID", "name", "location", "time")
@@ -102,8 +102,8 @@ def detect_security_breaches(security_logs):
                 if warning == false and out_before == false:
                     temp = [(i[2], i[3])]
                     ret[i[0]] = temp
-    print("hi")
-    print(ret)
+    #print("hi")
+    #print(ret)
     return ret
     
 
@@ -134,7 +134,7 @@ def detect_security_breaches(security_logs):
     
     
     #print(ret)
-    return ret
+    #return ret
 
 
 
