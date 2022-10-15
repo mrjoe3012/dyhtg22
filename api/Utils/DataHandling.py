@@ -69,3 +69,9 @@ def check_time_in_range(time_range, check_time):
 
     # return check_time ⊆ time_range
     return (check_time_ints[0] >= time_range_ints[0] and check_time_ints[0] <= time_range_ints[1]) and (check_time_ints[1] >= time_range_ints[0] and check_times_ints[1] <= time_range_ints[1])
+
+def detect_security_breaches(security_logs):
+    # go through security logs
+    # find out when a building is visited out of hours
+    # return a mapping from student ids to breach=(building,hours_visited)
+    pass
