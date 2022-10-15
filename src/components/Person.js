@@ -46,10 +46,11 @@ function Person()
             </div>
             <div className='person-info'>
                 <p><span className='header'>Name:</span> {person.name}</p>
-                <p><span className='header'>Matriculation #:</span> {person.id}</p>
-                <p><span className='header'>Age:</span> {person.age} years old</p>
+                <p><span className='header'>Matriculation:</span> {person.id}</p>
+                <p><span className='header'>Age:</span> {person.age}</p>
                 <p><span className='header'>Sex:</span> {person.sex}</p>
-                <p><span className='header'>Academic year:</span> {person.year} Year</p>
+                <p><span className='header'>Height:</span> {person.height}cm</p>
+                <p><span className='header'>Academic year:</span> {person.year}</p>
                 <p><span className='header'>Course:</span> {person.subject}</p>
                 <p><span className='header'>Societies:</span> {person.societies}</p>
             </div>
