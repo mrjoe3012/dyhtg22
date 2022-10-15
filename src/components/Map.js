@@ -43,6 +43,11 @@ function Map()
         "St Andrews": stAndrewsImage
     }
 
+    // var intensity = {
+    //     if intesity > 0.5 
+    // }
+
+
     // Function to convert number of people to hex value
 
     // On state change, pass hex value to each child through props
@@ -64,7 +69,7 @@ function Map()
                 <Building intensity={0.5} image={mainImage}></Building>
                 <Building intensity={0.5} image={adamSmithImage}></Building>
                 <Building intensity={0.7} image={jwsImage}></Building>
-                <Building intensity={0} image={kelvingroveImage}></Building>
+                <Building intensity={0.1} image={kelvingroveImage}></Building>
             </div>
         </div>
     );
