@@ -1,4 +1,10 @@
-import Utils
-from Utils import get_heatmap_values, get_security_logs
+import Utils, unittest
 
-print(get_heatmap_values(get_security_logs("data/Data")))
+class TestDataHandling(unittest.TestCase):
+    
+    def test_get_security_breaches(self):
+        security_breaches = Utils.detect_security_breaches(Utils.get_security_logs(Utils.DATABASE_FILENAME))
+        self.assertTrue("Abdul Murphy" in security_breaches and ("Boyd Orr Building", "2208-2219") in security_breaches["Abdul Murphy"])
+
+if __name__ == "__main__":
+    unittest.main()
