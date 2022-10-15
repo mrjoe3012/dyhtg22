@@ -6,9 +6,6 @@ class TestDataHandling(unittest.TestCase):
         security_breaches = Utils.detect_security_breaches(Utils.get_security_logs(Utils.DATABASE_FILENAME))
         self.assertTrue("Abdul Murphy" in security_breaches and ("Boyd Orr Building", "2208-2219") in security_breaches["Abdul Murphy"])
 
-    def test_friendly_time(self):
-        pass
-
     def test_check_time_in_range(self):
         self.assertFalse(Utils.check_time_in_range("0900-1700", "2000-2015")) # out of hours
         self.assertTrue(Utils.check_time_in_range("0900-1700", "0900-1200")) # right on time
@@ -27,5 +24,12 @@ class TestDataHandling(unittest.TestCase):
         self.assertTrue(Utils.check_time_overlap("1700-2200", "1730-2300")) # t
         self.assertFalse(Utils.check_time_overlap("0200-0300", "1500-1650")) # f
 
-if __name__ == "__main__":
-    unittest.main()
+#if __name__ == "__main__":
+#    unittest.main()
+
+#print(Utils.get_security_logs("data/Data"))
+print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0][0:3,:])
+print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][0:3])
+print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][58])
+#Utils.display_graph_from_adjacency_matrix(Utils.filter_interaction_graph(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], 3))
+
