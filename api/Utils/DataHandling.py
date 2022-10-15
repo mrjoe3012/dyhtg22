@@ -76,35 +76,43 @@ def check_time_in_range(time_range, check_time):
     return (time_difference(time1_ints[0], time2_ints[0]) <= time1_difference and time_difference(time1_ints[0], time2_ints[1]) <= time1_difference)
 
 def detect_security_breaches(security_logs):
+    # go through security logs
+    # find out when a building is visited out of hours
+    # return a mapping from student ids to breach=(building,hours_visited)
+    breaches_dict = {}
     location_data = get_buildings(Utils.DATABASE_FILENAME)
-    #print(location_data)
-    #print(security_logs)
-
-    #building data ('Building Name', 'Geolocation', 'Opening Times', 'Description')
-    #security logs ("Student ID", "name", "location", "time")
-
+    stripped_location_data = np.delete(np.delete(np.array(location_data)[1:],obj=1,axis=1),obj=2,axis=1) #only building name and opening times
+    building_names_times_dict = {}
+    for line in stripped_location_data:
+        building_names_times_dict[line[0]] = line[1]
+    del building_names_times_dict["Kelvingrove Park"] #delete kelvingrove as it does not have opening times
+    for access in security_logs:
+        if(access[2] in building_names_times_dict.keys()): #put here for queen maragret stuff going on
+            if not (check_time_overlap(access[3], building_names_times_dict[access[2]])):
+                breaches_dict[access[0]] = (access[2], access[3])
+    return breaches_dict
 
   #  dict ret ={}
-    ret = {}
-    for i in security_logs:
-        out_before = false
-        if i[0] in ret.keys():
-            out_before = true
+    # ret = {}
+    # for i in security_logs:
+    #     out_before = false
+    #     if i[0] in ret.keys():
+    #         out_before = true
 
-        for j in location_data:
-            if j[0] == i[2]:
-                warning = time_check(i[3], j[2])
-                if warning == false and out_before == true:
-                    temp = (i[2], i[3])
-                    list_hours = ret[i[0]] 
-                    list_hours.append(temp)
-                    ret[i[0]] = list_hours
-                if warning == false and out_before == false:
-                    temp = [(i[2], i[3])]
-                    ret[i[0]] = temp
+    #     for j in location_data:
+    #         if j[0] == i[2]:
+    #             warning = time_check(i[3], j[2])
+    #             if warning == false and out_before == true:
+    #                 temp = (i[2], i[3])
+    #                 list_hours = ret[i[0]] 
+    #                 list_hours.append(temp)
+    #                 ret[i[0]] = list_hours
+    #             if warning == false and out_before == false:
+    #                 temp = [(i[2], i[3])]
+    #                 ret[i[0]] = temp
     #print("hi")
     #print(ret)
-    return ret
+    #return ret
     
 
 
@@ -137,10 +145,6 @@ def detect_security_breaches(security_logs):
     #return ret
 
 
-
-    # go through security logs
-    # find out when a building is visited out of hours
-    # return a mapping from student ids to breach=(building,hours_visited)
 
 def get_meeting_adjacency_matrix(security_logs):
     #each element in security_logs is a building interaction
