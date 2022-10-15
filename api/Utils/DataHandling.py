@@ -88,7 +88,7 @@ def detect_security_breaches(security_logs):
     del building_names_times_dict["Kelvingrove Park"] #delete kelvingrove as it does not have opening times
     for access in security_logs:
         if(access[2] in building_names_times_dict.keys()): #put here for queen maragret stuff going on
-            if not (check_time_overlap(access[3], building_names_times_dict[access[2]])):
+            if not (check_time_in_range(building_names_times_dict[access[2]], access[3])):
                 breaches_dict[access[0]] = (access[2], access[3])
     return breaches_dict
 
