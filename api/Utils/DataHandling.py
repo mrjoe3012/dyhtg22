@@ -1,4 +1,7 @@
 import sqlite3
+
+from sympy import false, true
+import pandas as pd
 import string
 import Utils
 import numpy as np
@@ -12,6 +15,38 @@ def get_security_logs(db_filename):
     cur.execute(query)
     query_result = cur.fetchall()
     return query_result
+
+def get_buildings(db_filename):
+    query = "SELECT * FROM location_data"
+    con = sqlite3.connect(db_filename)
+    cur = con.cursor()
+    cur.execute(query)
+    query_result = cur.fetchall()
+    return query_result
+
+def get_people_data(db_filename):
+    query = "SELECT * FROM People_Data"
+    con = sqlite3.connect(db_filename)
+    cur = con.cursor()
+    cur.execute(query)
+    query_result = cur.fetchall()
+    data = []
+    for row in query_result:
+        entry = {}
+        entry["id"] = row[0]
+        entry["name"] = row[1]
+        entry["age"] = int(row[2])
+        entry["sex"] = row[3]
+        entry["year"] = row[4]
+        entry["subject"] = row[5]
+        entry["height"] = int(row[6])
+        entry["hair"] = row[7]
+        socs = row[8].strip()
+        socs = socs.replace("[","").replace("]","").replace("'","")
+        entry["societies"] = socs
+        data.append(entry)
+    return data
+        
 
 def get_heatmap_values(security_logs):
     # python array of tuples, all containing strings with 
@@ -68,7 +103,72 @@ def detect_security_breaches(security_logs):
     # go through security logs
     # find out when a building is visited out of hours
     # return a mapping from student ids to breach=(building,hours_visited)
-    pass
+    breaches_dict = {}
+    location_data = get_buildings(Utils.DATABASE_FILENAME)
+    stripped_location_data = np.delete(np.delete(np.array(location_data)[1:],obj=1,axis=1),obj=2,axis=1) #only building name and opening times
+    building_names_times_dict = {}
+    for line in stripped_location_data:
+        building_names_times_dict[line[0]] = line[1]
+    del building_names_times_dict["Kelvingrove Park"] #delete kelvingrove as it does not have opening times
+    for access in security_logs:
+        if(access[2] in building_names_times_dict.keys()): #put here for queen maragret stuff going on
+            if not (check_time_in_range(building_names_times_dict[access[2]], access[3])):
+                breaches_dict[access[0]] = (access[2], access[3])
+    return breaches_dict
+
+  #  dict ret ={}
+    # ret = {}
+    # for i in security_logs:
+    #     out_before = false
+    #     if i[0] in ret.keys():
+    #         out_before = true
+
+    #     for j in location_data:
+    #         if j[0] == i[2]:
+    #             warning = time_check(i[3], j[2])
+    #             if warning == false and out_before == true:
+    #                 temp = (i[2], i[3])
+    #                 list_hours = ret[i[0]] 
+    #                 list_hours.append(temp)
+    #                 ret[i[0]] = list_hours
+    #             if warning == false and out_before == false:
+    #                 temp = [(i[2], i[3])]
+    #                 ret[i[0]] = temp
+    #print("hi")
+    #print(ret)
+    #return ret
+    
+
+
+
+
+    
+    
+    # for i in security_logs:#
+ #       temp = i[3].split('-')
+  #      if i[0] in ret.keys():
+   #         for j in location_data:
+    #            temp2 = j[2].split('-')
+     #           if j[0] == i[2]:
+      #              if (int(temp[0])<int(temp2[0])) or (int(temp[1])>int(temp2[1])):
+       #                 temp_list = (j[0],i[3])
+        #                dict_list = ret[i[0]]
+         #               dict_list.append(temp_list)
+          #              ret[i[0]] = dict_list 
+        #else:
+         #   for y in location_data:
+          #      temp2 = y[2].split('-')
+           #     if y[0] == i[2]:
+            #        if (int(temp[0])<int(temp2[0])) or (int(temp[1])>int(temp2[1])):
+             #           temp_list = (y[0], i[3])
+              #          ret[i[0]] = [temp_list]
+    
+    
+    
+    #print(ret)
+    #return ret
+
+
 
 def get_meeting_adjacency_matrix(security_logs):
     #each element in security_logs is a building interaction
@@ -109,11 +209,11 @@ def display_graph_from_adjacency_matrix(adjacency_matrix):
     graph = nx.from_numpy_matrix(adjacency_matrix)
     # nodes = max(nx.connected_components(graph), key=len)
     # H = nx.subgraph(graph, nodes)
-    nx.draw(nx.connected_components(graph))
+    nx.draw(graph)
     plt.show()
 
 def filter_interaction_graph(adjacency_matrix, threshold):
     filtered_adjacency_matrix = np.copy(adjacency_matrix)
-    filtered_adjacency_matrix[np.where(adjacency_matrix < threshold)] = 0
+    #filtered_adjacency_matrix[np.where(adjacency_matrix < threshold)] = 0
+    filtered_adjacency_matrix[filtered_adjacency_matrix < threshold] = 0
     return filtered_adjacency_matrix
-
