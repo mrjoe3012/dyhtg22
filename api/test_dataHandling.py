@@ -31,6 +31,6 @@ class TestDataHandling(unittest.TestCase):
 print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0][0:3,:])
 print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][0:3])
 print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][58])
-#Utils.display_graph_from_adjacency_matrix(Utils.filter_interaction_graph(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], 3))
+Utils.display_graph_from_adjacency_matrix(Utils.filter_interaction_graph(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], 0))
 
 print(Utils.detect_security_breaches(Utils.get_security_logs("data/Data")))
