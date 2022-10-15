@@ -1,6 +1,7 @@
 .Person {
-    display: grid;
-    grid-template-rows: 3fr 2fr;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .Mugshot {
@@ -10,8 +11,13 @@
     position: relative;
 }
 
+.header {
+    font-weight: 600;
+}
+
 .person-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 2fr;
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
