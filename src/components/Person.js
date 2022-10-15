@@ -7,33 +7,37 @@ import './Person.css'
 import Mugshot from './Mugshot'
 import axios from 'axios'
 
+var index = 0;
+
+var defaultPerson = {};
+
 function Person()
 {
     const [people, setPeople] = useState('');
+    const [person, setPerson] = useState(defaultPerson);
 
     useEffect(() => {
         // 👇️ only runs once
         axios.get('http://127.0.0.1:5000/get-people')
-        .then(response => setPeople(response));
+        .then(response => {
+            setPeople(response.data);
+            setPerson(response.data[Math.floor(Math.random() * response.data.length)]);
+        },[]);//setPeople(response.data));
+        // setPerson(people[0]);
         
       }, []); // 👈️ empty dependencies array
 
-
-
-
-    console.log(people);
-
-    var person = {
-        'id': '2627430',
-        'name': 'Jamie Robb',
-        'age': '19',
-        'sex': 'Male',
-        'year': '2nd',
-        'subject': 'Computer Science',
-        'height': '178',
-        'hair': '#287456',
-        'societies': 'UGRacing'
-    }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if(people.length > 0)
+            {
+                index = Math.floor(Math.random() * people.length);
+                setPerson(people[index]);
+            }
+        }, 5000);
+      
+        return () => clearInterval(interval);
+      }, [people]);
 
     return (
         <div className="Card Person layout-person">

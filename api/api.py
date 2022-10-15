@@ -24,7 +24,7 @@ def route_get_security_logs():
 @app.route("/get-people")
 def route_get_people():
     people = Utils.get_people_data(Utils.DATABASE_FILENAME)
-    print(people)
+    # print(people)
     resp = jsonify(people)
     set_response_headers(resp)
     return resp
