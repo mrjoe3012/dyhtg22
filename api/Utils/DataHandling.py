@@ -109,11 +109,12 @@ def display_graph_from_adjacency_matrix(adjacency_matrix):
     graph = nx.from_numpy_matrix(adjacency_matrix)
     # nodes = max(nx.connected_components(graph), key=len)
     # H = nx.subgraph(graph, nodes)
-    nx.draw(nx.connected_components(graph))
+    nx.draw(graph)
     plt.show()
 
 def filter_interaction_graph(adjacency_matrix, threshold):
     filtered_adjacency_matrix = np.copy(adjacency_matrix)
-    filtered_adjacency_matrix[np.where(adjacency_matrix < threshold)] = 0
+    #filtered_adjacency_matrix[np.where(adjacency_matrix < threshold)] = 0
+    filtered_adjacency_matrix[filtered_adjacency_matrix < threshold] = 0
     return filtered_adjacency_matrix
 
