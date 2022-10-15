@@ -14,7 +14,6 @@ import m3 from '../assets/mugs/maleHair/3.png';
 var maleHair = [m1, m2, m3]
 var femaleHair = [f1, f2, f3]
 
-
 function Mugshot(props)
 {
     var body;
