@@ -24,13 +24,13 @@ function Person()
                 <Mugshot person={person}></Mugshot>
             </div>
             <div className='person-info'>
-                <p>{person.name}</p>
-                <p>{person.id}</p>
-                <p>{person.age} years old</p>
-                <p>{person.sex}</p>
-                <p>{person.year} Year</p>
-                <p>{person.subject}</p>
-                <p>{person.societies}</p>
+                <p><span className='header'>Name:</span> {person.name}</p>
+                <p><span className='header'>Matriculation #:</span> {person.id}</p>
+                <p><span className='header'>Age:</span> {person.age} years old</p>
+                <p><span className='header'>Sex:</span> {person.sex}</p>
+                <p><span className='header'>Academic year:</span> {person.year} Year</p>
+                <p><span className='header'>Course:</span> {person.subject}</p>
+                <p><span className='header'>Societies:</span> {person.societies}</p>
             </div>
         </div>
     );
