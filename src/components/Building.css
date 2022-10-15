@@ -1,0 +1,18 @@
+.Building {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.building-image {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    /* mix-blend-mode: multiply; */
+    /* animation: background-color-animation 5s ease-in-out infinite; */
+}
