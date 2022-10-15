@@ -31,3 +31,18 @@ def get_heatmap_values(security_logs):
             occurrence_dict[tuple[2]] += 1
 
     return occurrence_dict
+
+# returns true if the two time ranges overlap
+# e.g. 
+# check_time_overlap("2100-2200", "2150-2220") = True
+# check_time_overlap("2350-0100", "0010-0200") = True
+# check_time_overlap("1600-1800", "1900-2100") = False
+def check_time_overlap(time_range_1, time_range_2):
+    pass
+
+# returns true if check_time is within the time_range
+# e.g.
+# check_time_in_range("0900-1700", "1000-1200") = True
+# check_time_in_range("2200-0200", "0100-0300") =
+def check_time_in_range(time_range, check_time):
+    pass
