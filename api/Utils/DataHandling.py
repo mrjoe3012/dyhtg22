@@ -24,7 +24,7 @@ def get_security_logs(db_filename):
     query_result = cur.fetchall()
     result = []
     for row in query_result:
-        time = row[3]
+        time = row[4]
         if verify_time_format(time):
             result.append(row)
     return result

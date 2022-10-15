@@ -12,6 +12,7 @@
     left: 0px;
     height: 100%;
     width: 100%;
+    border-radius: 20px;
     /* mix-blend-mode: multiply; */
     /* animation: background-color-animation 5s ease-in-out infinite; */
 }
