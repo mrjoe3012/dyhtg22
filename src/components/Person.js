@@ -1,16 +1,33 @@
+import React, { useState, useEffect } from 'react';
+
+
 import './Card.css'
 import './Person.css'
 
 import Mugshot from './Mugshot'
+import axios from 'axios'
 
 function Person()
 {
+    const [people, setPeople] = useState('');
+
+    useEffect(() => {
+        // 👇️ only runs once
+        axios.get('http://127.0.0.1:5000/get-people')
+        .then(response => setPeople(response));
+        
+      }, []); // 👈️ empty dependencies array
+
+
+
+
+    console.log(people);
 
     var person = {
         'id': '2627430',
         'name': 'Jamie Robb',
         'age': '19',
-        'sex': 'Female',
+        'sex': 'Male',
         'year': '2nd',
         'subject': 'Computer Science',
         'height': '178',
