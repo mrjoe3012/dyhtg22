@@ -1,5 +1,20 @@
 import sqlite3
+import string
 import Utils
+
+def verify_time_format(time_string):
+    if type(time_string) != string or len(time_string) == 0:
+        return False
+    time_split = time_string.split("-")
+    if len(time_split) != 2:
+        return False
+    time_ints = [int(x) for x in time_split]
+    for x in time_ints:
+        if x < 0 or x > 2359:
+            return False
+    if time_ints[1] < time_ints[0]:
+        return False
+    return True
 
 def get_security_logs(db_filename):
     query = "SELECT * FROM Security_Logs"
@@ -7,7 +22,12 @@ def get_security_logs(db_filename):
     cur = con.cursor()
     cur.execute(query)
     query_result = cur.fetchall()
-    return query_result
+    result = []
+    for row in query_result:
+        time = row[3]
+        if verify_time_format(time):
+            result.append(row)
+    return result
 
 def get_heatmap_values(security_logs):
     # python array of tuples, all containing strings with 
