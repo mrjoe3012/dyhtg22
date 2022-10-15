@@ -5,8 +5,9 @@ import './Map.css';
 
 import Building from './Building';
 
-import mapBackground from '../assets/buildings/map_placeholder.jpg';
-import boydOrrImage from '../assets/buildings/boyd-orr.jpg';
+import mapBackground from '../assets/buildings/map_bottom.png';
+import boydOrrImage from '../assets/buildings/boydOrr.png';
+import libraryImage from '../assets/buildings/library.png';
 
 function Map()
 {
@@ -25,7 +26,8 @@ function Map()
     }
 
     var buildingImages = {
-        "Boyd Orr": boydOrrImage
+        "Boyd Orr": boydOrrImage,
+        "Library": libraryImage
     }
 
     // Function to convert number of people to hex value
@@ -35,10 +37,9 @@ function Map()
     return (
         <div className="Card layout-map">
             <div className='Map'>
-                <h1>Map</h1>
-                <img src={mapBackground} className="map-image"></img>
-                {/* <Building name="Boyd Orr" image={buildingImages["Boyd Orr"]}></Building> */}
-                <Building name="The Hive"></Building>
+                <img src={mapBackground} className="map-image" ></img>
+                <Building intensity={0.5} image={buildingImages["Boyd Orr"]}></Building>
+                <Building intensity={0.5} image={buildingImages["Library"]}></Building>
             </div>
         </div>
     );

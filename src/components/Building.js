@@ -4,8 +4,7 @@ function Building(props)
 {
     return (
         <div className="Building">
-            <h1>{props.name}</h1>
-            <img src={props.image} className="building-image"></img>
+            <img src={props.image} className="building-image" style={{'filter': `opacity(${props.intensity}) drop-shadow(0 0 0 red) drop-shadow(0 0 0 red)`}}></img>
         </div>
     )
 }
