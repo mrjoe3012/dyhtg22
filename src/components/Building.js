@@ -2,23 +2,23 @@ import './Building.css'
 
 function style_var(intensity, opacity)
 {
-    if(intensity < 0.1)
+    if(intensity < 0.4)
     {
         return {'filter': `opacity(${opacity}) drop-shadow(0 0 0 blue) drop-shadow(0 0 0 blue) drop-shadow(0 0 0 blue)`};
     } 
-    else if(intensity < 0.2)
+    else if(intensity < 0.5)
     {
         return {'filter': `opacity(${opacity}) drop-shadow(0 0 0 cyan) drop-shadow(0 0 0 cyan) drop-shadow(0 0 0 cyan)`};
     } 
-    else if(intensity < 0.3)
+    else if(intensity < 0.6)
     {
         return {'filter': `opacity(${opacity}) drop-shadow(0 0 0 green) drop-shadow(0 0 0 green) drop-shadow(0 0 0 green)`};
     } 
-    else if(intensity < 0.4)
+    else if(intensity < 0.7)
     {
         return {'filter': `opacity(${opacity}) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow) drop-shadow(0 0 0 yellow)`};
     } 
-    else if(intensity < 0.5)
+    else if(intensity < 0.85)
     {
         return {'filter': `opacity(${opacity}) drop-shadow(0 0 0 orange) drop-shadow(0 0 0 orange) drop-shadow(0 0 0 orange)`};
     } 

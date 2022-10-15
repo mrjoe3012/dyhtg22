@@ -13,3 +13,8 @@
     width: 100%;
     border-radius: 20px;
 }
+
+.gradient-scale {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
