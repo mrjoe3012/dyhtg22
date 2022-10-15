@@ -32,7 +32,7 @@ function Map()
             var offset = 0.5; // Increase to reduce transparency & increase sharpness
 
             var intensity_new = (Math.sin(Date.now() * y) * x) + offset;
-            console.log(intensity_new);
+            // console.log(intensity_new);
             setOpacity(intensity_new);
         }, 5);
       

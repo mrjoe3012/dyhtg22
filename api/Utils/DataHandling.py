@@ -24,6 +24,30 @@ def get_buildings(db_filename):
     query_result = cur.fetchall()
     return query_result
 
+def get_people_data(db_filename):
+    query = "SELECT * FROM People_Data"
+    con = sqlite3.connect(db_filename)
+    cur = con.cursor()
+    cur.execute(query)
+    query_result = cur.fetchall()
+    data = []
+    for row in query_result:
+        entry = {}
+        entry["id"] = row[0]
+        entry["name"] = row[1]
+        entry["age"] = int(row[2])
+        entry["sex"] = row[3]
+        entry["year"] = row[4]
+        entry["subject"] = row[5]
+        entry["height"] = int(row[6])
+        entry["hair"] = row[7]
+        socs = row[8].strip()
+        socs = socs.replace("[","").replace("]","").replace("'","")
+        entry["societies"] = socs
+        data.append(entry)
+    return data
+        
+
 def get_heatmap_values(security_logs):
     # python array of tuples, all containing strings with 
     occurrence_dict = {"Boyd Orr Building": 0,
