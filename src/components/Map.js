@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './Card.css';
 import './Map.css';
@@ -23,9 +23,22 @@ import kelvingroveImage from '../assets/buildings/kelvingrove.png';
 
 function Map()
 {
-    // const [time, setTime] = 
+    const [opacity, setOpacity] = useState(0.5);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            var x = 0.1; // Increase to increase range
+            var y = 0.002; // Increase to speed up
+            var offset = 0.5; // Increase to reduce transparency & increase sharpness
 
-    // Data structure containing number of people in each building for each time
+            var intensity_new = (Math.sin(Date.now() * y) * x) + offset;
+            console.log(intensity_new);
+            setOpacity(intensity_new);
+        }, 5);
+      
+        return () => clearInterval(interval);
+      }, []);
+
     var buildingLogs = {
         "0000": {
             "Boyd Orr": 20,
@@ -51,20 +64,20 @@ function Map()
         <div className="Card layout-map">
             <div className='Map'>
                 <img src={mapBackground} className="map-image" ></img>
-                <Building intensity={0.5} image={boydOrrImage}></Building>
-                <Building intensity={0.5} image={libraryImage}></Building>
-                <Building intensity={0.5} image={stAndrewsImage}></Building>
-                <Building intensity={0.5} image={kelvinImage}></Building>
-                <Building intensity={0.5} image={josephBlackImage}></Building>
-                <Building intensity={0.5} image={qmuImage}></Building>
-                <Building intensity={0.5} image={alwynImage}></Building>
-                <Building intensity={0.5} image={hiveImage}></Building>
-                <Building intensity={0.5} image={guuImage}></Building>
-                <Building intensity={0.5} image={wolfsonImage}></Building>
-                <Building intensity={0.5} image={mainImage}></Building>
-                <Building intensity={0.5} image={adamSmithImage}></Building>
-                <Building intensity={0.7} image={jwsImage}></Building>
-                <Building intensity={0} image={kelvingroveImage}></Building>
+                <Building intensity={0.4} opacity={opacity} image={boydOrrImage}></Building>
+                <Building intensity={0.6} opacity={opacity}  image={libraryImage}></Building>
+                <Building intensity={0.3} opacity={opacity}  image={stAndrewsImage}></Building>
+                <Building intensity={0.05} opacity={opacity}  image={kelvinImage}></Building>
+                <Building intensity={0.5} opacity={opacity}  image={josephBlackImage}></Building>
+                <Building intensity={0.8} opacity={opacity}  image={qmuImage}></Building>
+                <Building intensity={1} opacity={opacity}  image={alwynImage}></Building>
+                <Building intensity={0.2} opacity={opacity}  image={hiveImage}></Building>
+                <Building intensity={0.3} opacity={opacity}  image={guuImage}></Building>
+                <Building intensity={0.5} opacity={opacity}  image={wolfsonImage}></Building>
+                <Building intensity={0.4} opacity={opacity}  image={mainImage}></Building>
+                <Building intensity={0.5} opacity={opacity}  image={adamSmithImage}></Building>
+                <Building intensity={0.7} opacity={opacity}  image={jwsImage}></Building>
+                <Building intensity={0.2} opacity={opacity}  image={kelvingroveImage}></Building>
             </div>
         </div>
     );
