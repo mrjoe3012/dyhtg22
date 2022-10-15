@@ -1,12 +1,12 @@
-import time
-from flask import Flask
+import json
+import Utils
+from flask import Flask, jsonify
+
+from Utils import get_security_logs
 
 app = Flask(__name__)
 
-@app.route("/time")
-def get_current_time():
-    return {"time" : time.time()}
-
-@app.route("/")
-def hello_world():
-    return "<h1>Hello World</h1>\n<p>(this means that flask is working!)</p>"
+@app.route("/get-security-logs")
+def route_get_security_logs():
+    security_log = get_security_logs(Utils.DATABASE_FILENAME)
+    return jsonify(security_log)
