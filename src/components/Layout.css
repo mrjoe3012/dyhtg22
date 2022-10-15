@@ -1,15 +1,13 @@
 .Layout{
-    height: 100%;
+    margin: 20px;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 1fr 1fr;
-    /* margin: 40px; */
     column-gap: 20px;
     row-gap: 20px;
 }
 
 .layout-map {
-    background-color: lightgray;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 1;
@@ -17,7 +15,6 @@
   }
 
 .layout-person {
-    background-color: blue;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -25,7 +22,6 @@
 }
 
 .layout-info {
-    background-color: green;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;

@@ -1,11 +1,13 @@
 import './App.css';
 
+import Nav from './components/Nav';
 import Layout from './components/Layout';
 
 function App() {
   return (
     <div className="App">
-      <Layout></Layout>
+      <Nav className='app-nav'></Nav>
+      <Layout className="app-layout"></Layout>
     </div>
   );
 }
