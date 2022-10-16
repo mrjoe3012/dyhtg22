@@ -209,7 +209,9 @@ def display_graph_from_adjacency_matrix(adjacency_matrix):
     graph = nx.from_numpy_matrix(adjacency_matrix)
     # nodes = max(nx.connected_components(graph), key=len)
     # H = nx.subgraph(graph, nodes)
-    nx.draw(graph)
+    nx.draw(graph, with_labels=True)
+    for node in graph.nodes:
+        print(node)
     plt.show()
 
 def filter_interaction_graph(adjacency_matrix, threshold):
