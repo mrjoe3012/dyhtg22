@@ -1,3 +1,5 @@
+from more_itertools import adjacent
+import numpy as np
 import Utils, unittest
 
 class TestDataHandling(unittest.TestCase):
@@ -28,9 +30,23 @@ class TestDataHandling(unittest.TestCase):
 #    unittest.main()
 
 #print(Utils.get_security_logs("data/Data"))
-print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0][0:3,:])
-print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][0:3])
-print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][58])
-Utils.display_graph_from_adjacency_matrix(Utils.filter_interaction_graph(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], 0))
+#print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0][0:4,:])
+#print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][0:3])
+#print(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1][58])
+#Utils.display_graph_from_adjacency_matrix(Utils.filter_interaction_graph(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], 0))
 
-print(Utils.detect_security_breaches(Utils.get_security_logs("data/Data")))
+#print(Utils.detect_security_breaches(Utils.get_security_logs("data/Data")))
+
+#print(Utils.get_adjacency_matrix_for_suspects(Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[0], Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))[1]))
+adjacency_mat, student_id_list = Utils.get_meeting_adjacency_matrix(Utils.get_security_logs("data/Data"))
+suspects = Utils.get_mastermind(adjacency_mat, student_id_list)[1]
+#print(np.where(adjacency_mat[student_id_list.index("2832313W")] > 0))
+#print([student_id_list[x] for x in np.where(adjacency_mat[student_id_list.index("2832313W")] > 0)[0] if x in suspects])
+#suspects met by Scott Woods
+print([student_id_list[x] for x in np.where(adjacency_mat[student_id_list.index("2792337W")] > 0)[0] if x in suspects])
+print(Utils.get_mastermind(adjacency_mat, student_id_list)[0])
+
+#person who has interacted with all these paople
+#highest amount of interactions
+#for each student calculate the total number of itneractions wiith people from this list and the amount
+# of people from this list interacted with
