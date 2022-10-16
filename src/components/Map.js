@@ -25,11 +25,81 @@ import kelvingroveImage from '../assets/buildings/kelvingrove.png';
 
 function Map()
 {
+    const buildings = {
+        "Adam Smith Building": {
+            'totalVisited': 44,
+            'image': adamSmithImage
+        },
+        "Boyd Orr Building": {
+            'totalVisited': 64,
+            'image': boydOrrImage
+        },
+        "Glasgow University Union": {
+            'totalVisited': 68,
+            'image': guuImage
+        },
+        "James Watt Building": {
+            'totalVisited': 36,
+            'image': jwsImage
+        },
+        "Joseph Black Building": {
+            'totalVisited': 16,
+            'image': josephBlackImage
+        },
+        "Kelvin Building": {
+            'totalVisited': 17,
+            'image': kelvinImage
+        },
+        "Kelvingrove Park": {
+            'totalVisited': 68,
+            'image': kelvingroveImage
+        },
+        "Library": {
+            'totalVisited': 66,
+            'image': libraryImage
+        },
+        "Main Building": {
+            'totalVisited': 85,
+            'image': mainImage
+        },
+        "Queen Margaret Union": {
+            'totalVisited': 68,
+            'image': qmuImage
+        },
+        "Sir Alwyn Williams Building": {
+            'totalVisited': 27,
+            'image': alwynImage
+        },
+        "St Andrews Building": {
+            'totalVisited': 42,
+            'image': stAndrewsImage
+        },
+        "The Hive": {
+            'totalVisited': 19,
+            'image': hiveImage
+        },
+        "Wolfson Medical Building": {
+            'totalVisited': 41,
+            'image': wolfsonImage
+        },
+      }   
+
+    var total = 0;
+
+    for (const [key, value] of Object.entries(buildings)) {
+        if (value.totalVisited > total)
+        {
+            total = value.totalVisited;
+        }
+    }
+
+    // console.log(total)
+    
     const [opacity, setOpacity] = useState(0.5);
     
     useEffect(() => {
         const interval = setInterval(() => {
-            var x = 0.1; // Increase to increase range
+            var x = 0.125; // Increase to increase range
             var y = 0.002; // Increase to speed up
             var offset = 0.5; // Increase to reduce transparency & increase sharpness
 
@@ -41,28 +111,29 @@ function Map()
         return () => clearInterval(interval);
       }, []);
 
-    // Function to convert number of people to hex value
-
-    // On state change, pass hex value to each child through props
-    
     return (
         <div className="Card layout-map">
             <div className='Map'>
                 <img src={mapBackground} className="map-image" ></img>
-                <Building intensity={0.4} opacity={opacity} image={boydOrrImage}></Building>
-                <Building intensity={0.6} opacity={opacity}  image={libraryImage}></Building>
-                <Building intensity={0.3} opacity={opacity}  image={stAndrewsImage}></Building>
-                <Building intensity={0.05} opacity={opacity}  image={kelvinImage}></Building>
-                <Building intensity={0.5} opacity={opacity}  image={josephBlackImage}></Building>
-                <Building intensity={0.8} opacity={opacity}  image={qmuImage}></Building>
-                <Building intensity={1} opacity={opacity}  image={alwynImage}></Building>
-                <Building intensity={0.2} opacity={opacity}  image={hiveImage}></Building>
-                <Building intensity={0.3} opacity={opacity}  image={guuImage}></Building>
-                <Building intensity={0.5} opacity={opacity}  image={wolfsonImage}></Building>
-                <Building intensity={0.4} opacity={opacity}  image={mainImage}></Building>
-                <Building intensity={0.5} opacity={opacity}  image={adamSmithImage}></Building>
-                <Building intensity={0.7} opacity={opacity}  image={jwsImage}></Building>
-                <Building intensity={0.2} opacity={opacity}  image={kelvingroveImage}></Building>
+                <Building intensity={buildings['Boyd Orr Building'].totalVisited / total} opacity={opacity} image={boydOrrImage}></Building>
+                <Building intensity={buildings['Library'].totalVisited / total} opacity={opacity}  image={libraryImage}></Building>
+                <Building intensity={buildings['St Andrews Building'].totalVisited / total} opacity={opacity}  image={stAndrewsImage}></Building>
+                <Building intensity={buildings['Kelvin Building'].totalVisited / total} opacity={opacity}  image={kelvinImage}></Building>
+                <Building intensity={buildings['Joseph Black Building'].totalVisited / total} opacity={opacity}  image={josephBlackImage}></Building>
+                <Building intensity={buildings['Queen Margaret Union'].totalVisited / total} opacity={opacity}  image={qmuImage}></Building>
+                <Building intensity={buildings['Sir Alwyn Williams Building'].totalVisited / total} opacity={opacity}  image={alwynImage}></Building>
+                <Building intensity={buildings['The Hive'].totalVisited / total} opacity={opacity}  image={hiveImage}></Building>
+                <Building intensity={buildings['Glasgow University Union'].totalVisited / total} opacity={opacity}  image={guuImage}></Building>
+                <Building intensity={buildings['Wolfson Medical Building'].totalVisited / total} opacity={opacity}  image={wolfsonImage}></Building>
+                <Building intensity={buildings['Main Building'].totalVisited / total} opacity={opacity}  image={mainImage}></Building>
+                <Building intensity={buildings['Adam Smith Building'].totalVisited / total} opacity={opacity}  image={adamSmithImage}></Building>
+                <Building intensity={buildings['James Watt Building'].totalVisited / total} opacity={opacity}  image={jwsImage}></Building>
+                <Building intensity={buildings['Kelvingrove Park'].totalVisited / total} opacity={opacity}  image={kelvingroveImage}></Building>
+            </div>
+            <div className='gradient-scale'>
+                <p className='label'>Low</p>
+                <img></img>
+                <p className='gradient-scale'>High</p>
             </div>
             {/* <div className='heatmap-scale'>
                 <p>Low</p>

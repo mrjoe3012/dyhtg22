@@ -30,3 +30,7 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
+.gradient-scale {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
