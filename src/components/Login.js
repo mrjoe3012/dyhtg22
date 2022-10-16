@@ -14,7 +14,7 @@ function Login()
                 <h1>Guy Finder</h1>
                 <form className='login-form'>
                     <input label="Username:"></input>
-                    <input label="Password:"></input>
+                    <input type="password" label="Password:"></input>
                     <Link to="/dashboard">
                         <button>Log In</button>
                     </Link>
