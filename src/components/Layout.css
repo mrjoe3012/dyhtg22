@@ -22,11 +22,12 @@
 }
 
 .layout-options {
-    translate: -325px 25px;
-    grid-column-start: 2;
-    grid-column-end: 3;
+translate: -25% 5%;
+    /* translate: -325px 25px; */
+    /* grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-end: 2; */
 }
 
 .Layout img{
