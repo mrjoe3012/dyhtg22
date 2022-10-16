@@ -16,11 +16,7 @@ function Graph() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log(id);
-
         generateGraph(id);
-        // setId('')
     }
 
     console.log(typeof(graphImage));

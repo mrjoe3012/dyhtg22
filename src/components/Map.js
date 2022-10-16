@@ -104,7 +104,6 @@ function Map()
             var offset = 0.5; // Increase to reduce transparency & increase sharpness
 
             var intensity_new = (Math.sin(Date.now() * y) * x) + offset;
-            // console.log(intensity_new);
             setOpacity(intensity_new);
         }, 5);
       
@@ -130,17 +129,10 @@ function Map()
                 <Building intensity={buildings['James Watt Building'].totalVisited / total} opacity={opacity}  image={jwsImage}></Building>
                 <Building intensity={buildings['Kelvingrove Park'].totalVisited / total} opacity={opacity}  image={kelvingroveImage}></Building>
             </div>
-            <div className='gradient-scale'>
-                <p className='label'>Low</p>
-                <img></img>
-                <p className='gradient-scale'>High</p>
-            </div>
             <div className='heatmap-scale'>
                 <p className='Low'>Low</p>
-                
-                    <img src={GradientBar} className="GradientBar"></img>
-                    <p className='High'>High</p>
-                {/* <p>High</p> */}
+                <img src={GradientBar} className="GradientBar"></img>
+                <p className='High'>High</p>
             </div>
         </div>
     );

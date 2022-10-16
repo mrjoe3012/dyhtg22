@@ -33,8 +33,7 @@ function Layout()
             <div className="Layout">
                 <Graph></Graph>
                 <Person></Person>
-                                <Options onClick={chooseTab}></Options>
-
+                <Options onClick={chooseTab}></Options>
             </div>
         );
     }
