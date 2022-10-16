@@ -1,0 +1,10 @@
+/* .layout-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.heatmapButton {
+    position: relative;
+    justify-content: top;
+}

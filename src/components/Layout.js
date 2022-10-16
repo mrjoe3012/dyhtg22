@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import Graph from './Graph'
 import Map from "./Map";
@@ -17,22 +17,28 @@ function Layout()
 
     if (tab == 'map'){
         return (
-            <div className="Layout">
-                
-                <Map></Map>
-                <Person></Person>
-                <Options onClick={chooseTab}></Options>
-            </div>
+            <Fragment>
+                <div className="Layout">
+                    <Map></Map>
+                    <Person></Person>
+                </div>
+                <div className='optionButtons'>
+                    <Options onClick={chooseTab}></Options>
+                </div>
+            </Fragment>
         );
     }
     else if(tab == 'graph'){
         return (
-            <div className="Layout">
-                <Graph></Graph>
-                <Person></Person>
-                                <Options onClick={chooseTab}></Options>
-
-            </div>
+            <Fragment>
+                <div className="Layout">
+                    <Graph></Graph>
+                    <Person></Person>
+                </div>
+                <div className='optionButtons'>
+                    <Options onClick={chooseTab}></Options>
+                </div>
+            </Fragment>
         );
     }
 
