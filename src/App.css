@@ -19,3 +19,11 @@
   grid-row-end: 3;
 }
 
+button {
+  background-color: #143762;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 10px;
+  /* height: ; */
+}

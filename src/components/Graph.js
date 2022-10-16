@@ -6,7 +6,7 @@ import './Graph.css'
 
 function Graph() {
 
-    const [graphImage, setGraphImage] = useState('');
+    const [graphImage, setGraphImage] = useState();
 
     const [id, setId] = useState();
 
@@ -23,9 +23,9 @@ function Graph() {
 
     return (
         <div className="Card layout-graph Graph">
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="title" value={id} onChange={e => setId(e.target.value)}></input>
+            <form onSubmit={handleSubmit} className='filter'>
                 <button type="submit" className="btn">Generate graph for students</button>
+                <input type="text" name="title" placeholder="Type student IDs here..." value={id} onChange={e => setId(e.target.value)}></input>
             </form>
             <img src={graphImage} className="graph-image"></img>
         </div>
