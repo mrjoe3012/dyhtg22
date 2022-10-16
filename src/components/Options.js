@@ -1,5 +1,6 @@
 import './Card.css'
 import './Layout.css'
+import './Options.css'
 
 function Options(props)
 {
@@ -12,9 +13,9 @@ function Options(props)
     }
 
     return (
-        <div className="Card layout-options">
-            <button onClick={onHeatmap}>Heatmap</button>
-            <button onClick={onGraphs}>Graphs</button>
+        <div className="layout-card layout-options">
+            <button onClick={onHeatmap} className="heatmapButton">Heatmap</button>
+            <button onClick={onGraphs} className="graphButton">Graphs</button>
         </div>
     )
 }

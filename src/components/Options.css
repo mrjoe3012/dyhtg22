@@ -1,0 +1,20 @@
+/* .layout-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+button {
+    background-color: #143762;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 20px 20px;
+    font-size: 1.1em;
+    /* height: ; */
+}
+
+.heatmapButton {
+    position: relative;
+    justify-content: top;
+}
