@@ -29,10 +29,12 @@
 }
 
 .layout-options {
-    grid-column-start: 2;
-    grid-column-end: 3;
+translate: -25% 5%;
+    /* translate: -325px 25px; */
+    /* grid-column-start: 1;
+    grid-column-end: 1;
     grid-row-start: 1;
-    grid-row-end: 2;
+    grid-row-end: 2; */
 }
 
 /* @media (max-width: 1200px) {
@@ -55,3 +57,35 @@
         grid-row-end: 3;
     }
 } */
+/* .heatmapBtn{
+translate: -180;
+} */
+.optionBtn{
+  background-image: linear-gradient(92.88deg, #455EB5 9.16%, #5643CC 43.89%, #673FD7 64.72%);
+  border-radius: 4px;
+  border-style: none;
+  width: 30%;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: "Inter UI","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  height: 4rem;
+  padding: 0 1.2rem;
+  text-align: center;
+  text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  height: 35%;
+  border-radius: 5%;
+}
+
+.optionBtn:hover {
+  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+  transition-duration: .1s;
+}
+

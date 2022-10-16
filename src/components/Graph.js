@@ -20,7 +20,7 @@ function Graph() {
         console.log(id);
 
         generateGraph(id);
-        setId('')
+        // setId('')
     }
 
     console.log(typeof(graphImage));

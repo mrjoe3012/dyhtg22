@@ -31,9 +31,10 @@ function Layout()
     else if(tab == 'graph'){
         return (
             <div className="Layout">
-                <Options onClick={chooseTab}></Options>
                 <Graph></Graph>
                 <Person></Person>
+                                <Options onClick={chooseTab}></Options>
+
             </div>
         );
     }

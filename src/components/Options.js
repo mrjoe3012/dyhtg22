@@ -13,9 +13,10 @@ function Options(props)
     }
 
     return (
-        <div className="layout-card layout-options">
-            <button onClick={onHeatmap} className="heatmapButton">Heatmap</button>
-            <button onClick={onGraphs} className="graphButton">Graphs</button>
+        <div className="layout-options">
+            {/* <div> */}
+            <button onClick={onHeatmap} className="optionBtn">Heatmap</button>
+            <button onClick={onGraphs} className="optionBtn">Graphs</button>
         </div>
     )
 }
