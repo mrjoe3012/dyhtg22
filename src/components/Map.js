@@ -64,11 +64,13 @@ function Map()
                 <Building intensity={0.7} opacity={opacity}  image={jwsImage}></Building>
                 <Building intensity={0.2} opacity={opacity}  image={kelvingroveImage}></Building>
             </div>
-            {/* <div className='heatmap-scale'>
-                <p>Low</p>
-                <img src={GradientBar} className="GradientBar"></img>
-                <p>High</p>
-            </div> */}
+            <div className='heatmap-scale'>
+                <p className='Low'>Low</p>
+                
+                    <img src={GradientBar} className="GradientBar"></img>
+                    <p className='High'>High</p>
+                {/* <p>High</p> */}
+            </div>
         </div>
     );
 }
