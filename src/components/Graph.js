@@ -8,7 +8,7 @@ function Graph() {
 
     const [graphImage, setGraphImage] = useState();
 
-    const [id, setId] = useState();
+    const [id, setId] = useState('');
 
     function generateGraph(id) {
         setGraphImage(`http://127.0.0.1:5000/get-interaction-graph?students=${id}`)
