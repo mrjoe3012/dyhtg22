@@ -1,7 +1,7 @@
 .Person {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: top;
 }
 
 .Mugshot {
@@ -16,6 +16,7 @@
 }
 
 .person-info {
+    padding-top: 50px;
     font-size: 1.1em;
     display: flex;
     flex-direction: column;
