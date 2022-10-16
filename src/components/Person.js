@@ -34,7 +34,7 @@ function Person()
                 index = Math.floor(Math.random() * people.length);
                 setPerson(people[index]);
             }
-        }, 5000);
+        }, 10000);
       
         return () => clearInterval(interval);
       }, [people]);

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import './Card.css'
 import './Layout.css'
+import './Graph.css'
 
 function Graph() {
 
@@ -18,19 +19,19 @@ function Graph() {
 
         console.log(id);
 
-        setGraphImage(id);
+        generateGraph(id);
         setId('')
     }
 
     console.log(typeof(graphImage));
 
     return (
-        <div className="Card layout-graph">
+        <div className="Card layout-graph Graph">
             <form onSubmit={handleSubmit}>
                 <input type="text" name="title" value={id} onChange={e => setId(e.target.value)}></input>
                 <button type="submit" className="btn">Generate graph for students</button>
             </form>
-            <img src={graphImage}></img>
+            <img src={graphImage} className="graph-image"></img>
         </div>
     )
 }
