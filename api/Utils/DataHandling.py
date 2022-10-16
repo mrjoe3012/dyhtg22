@@ -1,3 +1,4 @@
+from io import BytesIO
 import sqlite3
 
 from sympy import false, true
@@ -205,12 +206,22 @@ def get_dict_from_adjacency_matrix(adjacency_matrix, student_ids):
                 interaction_dict[student_id].append((student_ids[i], adjacency_matrix_current_row[i]))
     return interaction_dict
 
-def display_graph_from_adjacency_matrix(adjacency_matrix):
+def display_graph_from_adjacency_matrix(adjacency_matrix, student_ids, show=True):
     graph = nx.from_numpy_matrix(adjacency_matrix)
     # nodes = max(nx.connected_components(graph), key=len)
     # H = nx.subgraph(graph, nodes)
-    nx.draw(graph)
-    plt.show()
+    mapping = {x : student_ids[x] for x in range(len(student_ids))}
+    graph = nx.relabel_nodes(graph, mapping)
+    graph.remove_nodes_from(list(nx.isolates(graph)))
+    nx.draw(graph, with_labels=True)
+    if show:
+        plt.show()
+    else:
+        bytes = BytesIO()
+        plt.savefig(bytes, format="png")
+        bytes.seek(0)
+        # get data with bytes.read()
+        return bytes
 
 def filter_interaction_graph(adjacency_matrix, threshold):
     filtered_adjacency_matrix = np.copy(adjacency_matrix)
