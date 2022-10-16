@@ -28,21 +28,6 @@
     grid-row-end: 2;
 }
 
-.Layout img{
-    grid-column-start: 1;
-    grid-column-end: 2;
-    justify-content: center;
-
-}    
-.GradientBar{
-max-height: 40px;
-min-width: auto;
-grid-column-start: 1;
-grid-column-end: 2;
-justify-content: center;
-    
-}
-
 /* @media (max-width: 1200px) {
     .Layout{
         grid-template-columns: 1fr;
