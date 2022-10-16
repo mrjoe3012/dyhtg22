@@ -1,3 +1,4 @@
+from io import BytesIO
 import sqlite3
 
 from sympy import false, true
@@ -110,65 +111,6 @@ def detect_security_breaches(security_logs):
     for line in stripped_location_data:
         building_names_times_dict[line[0]] = line[1]
     del building_names_times_dict["Kelvingrove Park"] #delete kelvingrove as it does not have opening times
-    for access in security_logs:
-        if(access[2] in building_names_times_dict.keys()): #put here for queen maragret stuff going on
-            if not (check_time_in_range(building_names_times_dict[access[2]], access[3])):
-                breaches_dict[access[0]] = (access[2], access[3])
-    return breaches_dict
-
-  #  dict ret ={}
-    # ret = {}
-    # for i in security_logs:
-    #     out_before = false
-    #     if i[0] in ret.keys():
-    #         out_before = true
-
-    #     for j in location_data:
-    #         if j[0] == i[2]:
-    #             warning = time_check(i[3], j[2])
-    #             if warning == false and out_before == true:
-    #                 temp = (i[2], i[3])
-    #                 list_hours = ret[i[0]] 
-    #                 list_hours.append(temp)
-    #                 ret[i[0]] = list_hours
-    #             if warning == false and out_before == false:
-    #                 temp = [(i[2], i[3])]
-    #                 ret[i[0]] = temp
-    #print("hi")
-    #print(ret)
-    #return ret
-    
-
-
-
-
-    
-    
-    # for i in security_logs:#
- #       temp = i[3].split('-')
-  #      if i[0] in ret.keys():
-   #         for j in location_data:
-    #            temp2 = j[2].split('-')
-     #           if j[0] == i[2]:
-      #              if (int(temp[0])<int(temp2[0])) or (int(temp[1])>int(temp2[1])):
-       #                 temp_list = (j[0],i[3])
-        #                dict_list = ret[i[0]]
-         #               dict_list.append(temp_list)
-          #              ret[i[0]] = dict_list 
-        #else:
-         #   for y in location_data:
-          #      temp2 = y[2].split('-')
-           #     if y[0] == i[2]:
-            #        if (int(temp[0])<int(temp2[0])) or (int(temp[1])>int(temp2[1])):
-             #           temp_list = (y[0], i[3])
-              #          ret[i[0]] = [temp_list]
-    
-    
-    
-    #print(ret)
-    #return ret
-
-
 
 def get_meeting_adjacency_matrix(security_logs):
     #each element in security_logs is a building interaction
@@ -205,15 +147,78 @@ def get_dict_from_adjacency_matrix(adjacency_matrix, student_ids):
                 interaction_dict[student_id].append((student_ids[i], adjacency_matrix_current_row[i]))
     return interaction_dict
 
-def display_graph_from_adjacency_matrix(adjacency_matrix):
+def display_graph_from_adjacency_matrix(adjacency_matrix, student_ids, show=True):
     graph = nx.from_numpy_matrix(adjacency_matrix)
     # nodes = max(nx.connected_components(graph), key=len)
     # H = nx.subgraph(graph, nodes)
-    nx.draw(graph)
-    plt.show()
+    mapping = {x : student_ids[x] for x in range(len(student_ids))}
+    graph = nx.relabel_nodes(graph, mapping)
+    graph.remove_nodes_from(list(nx.isolates(graph)))
+    plt.close()
+    nx.draw(graph, with_labels=True)
+    if show:
+        plt.show()
+    else:
+        bytes = BytesIO()
+        plt.savefig(bytes, format="png")
+        bytes.seek(0)
+        # get data with bytes.read()
+        return bytes
 
 def filter_interaction_graph(adjacency_matrix, threshold):
     filtered_adjacency_matrix = np.copy(adjacency_matrix)
     #filtered_adjacency_matrix[np.where(adjacency_matrix < threshold)] = 0
     filtered_adjacency_matrix[filtered_adjacency_matrix < threshold] = 0
     return filtered_adjacency_matrix
+
+def get_adjacency_matrix_for_suspects(adjacency_matrix, student_ids):
+    relevant_id_indices = np.array([student_ids.index("2774868P"), 
+                            student_ids.index("2546112P"),
+                            student_ids.index("2912324G"),
+                            student_ids.index("2786843M"),
+                            student_ids.index("2456431B"),
+                            student_ids.index("2446198D"),
+                            student_ids.index("2558094B"),
+                            student_ids.index("2453876J")])
+    print(relevant_id_indices)
+    print(adjacency_matrix.shape)
+    suspect_adj_matrix = np.take(adjacency_matrix, relevant_id_indices, axis=0)
+    suspect_adj_matrix = np.take(suspect_adj_matrix, relevant_id_indices, axis=1)
+    return suspect_adj_matrix
+
+def get_adjacency_matrix_for_given_student_ids(adjacency_matrix, student_ids, student_ids_to_include):
+    student_id_minus = list(student_ids)
+    indices_for_student_ids_to_include = []
+    for id in student_ids_to_include:
+        student_id_minus.remove(id)
+    for i, student_id_to_include in enumerate(student_id_minus):
+        indices_for_student_ids_to_include.append(student_ids.index(student_id_to_include))
+    indices_for_student_ids_to_include = np.array(indices_for_student_ids_to_include)
+    #print(relevant_id_indices)
+    #print(adjacency_matrix.shape)
+    #print(indices_for_student_ids_to_include.dtype)
+    #np.fill_diagonal(adjacency_matrix, 1)
+    #specific_adj_matrix = np.take(adjacency_matrix, np.where(adjacency_matrix[indices_for_student_ids_to_include] > 0), axis=0)
+    specific_adj_matrix = np.copy(adjacency_matrix)
+    specific_adj_matrix[indices_for_student_ids_to_include,:] = 0
+    #specific_adj_matrix = np.take(specific_adj_matrix, np.where(specific_adj_matrix[indices_for_student_ids_to_include] > 0), axis=1)
+    return specific_adj_matrix
+
+def get_mastermind(adjacency_matrix, student_ids):
+    interaction_with_suspects_list = []
+    number_of_connection_list = []
+    relevant_id_indices = np.array([student_ids.index("2774868P"), 
+                            student_ids.index("2546112P"),
+                            student_ids.index("2912324G"),
+                            student_ids.index("2786843M"),
+                            student_ids.index("2456431B"),
+                            student_ids.index("2446198D"),
+                            student_ids.index("2558094B"),
+                            student_ids.index("2453876J")])
+    for i, student_id in enumerate(student_ids):
+        interaction_with_suspects_list.append((student_id, len(np.where(adjacency_matrix[i][relevant_id_indices]>0)[0])))
+        interaction_with_suspects_list = sorted(interaction_with_suspects_list, key=lambda x:x[1])[::-1]
+    for i,row in enumerate(adjacency_matrix):
+        number_of_connection_list.append((student_ids[i], len(np.where(row > 0)[0])))
+    number_of_connection_list = sorted(number_of_connection_list, key=lambda x:x[1])[::-1]
+    return interaction_with_suspects_list, relevant_id_indices

@@ -14,11 +14,11 @@
     border-radius: 20px;
 }
 
-.heatmap-scale {
+/* .heatmap-scale {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-row: 1;
-}
+} */
 
 .label {
     font-weight: 600;
@@ -30,7 +30,53 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
-/* .gradient-scale {
+
+.layout-map .heatmap-scale{
+    /* padding-top: 3%; */
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-} */
+    grid-row: 1;
+}
+
+.layout-map .heatmap-scale .GradientBar{
+    padding-top: 1.5%;
+    width: 100%;
+    height: 100%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.layout-map .heatmap-scale .Low{
+    /* padding-top: 6px; */
+    position:relative; left:100px;
+    padding-top: 3px;
+    font-weight: bold;
+    font-size: large;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+/* .layout-map .heatmap-scale .high{
+    /* position:relative; left:80px; top:2px; right: 1000px; */
+    /* padding-bottom: 60px; */
+    /* margin-top: 35px; */
+    /* padding-top: 10%; */
+    /* grid-column-start: 3;
+    grid-column-end: 4; */
+    /* margin: auto;
+    padding: auto; */
+/* }  */
+
+.layout-map .heatmap-scale .High{
+    position:relative; right:100px;
+    padding-top: 3px;
+    font-weight: bold;
+    font-size: large;
+        /* padding-left: 6px; */
+    /* margin-top: 35px; */
+    /* padding-top: 10%; */
+ /* grid-column-start: 3;
+    grid-column-end: 4; */
+    /* margin: auto;
+    padding: auto;*/
+}
