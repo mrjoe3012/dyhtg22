@@ -2,3 +2,19 @@
     background-color: #143762;
     color: white;
 }
+
+.Nav layout-nav img{
+    max-width: auto;
+    max-height: 40px;
+
+}
+
+.titleLogo{
+    display: block;
+    max-width: auto;
+    max-height: 60px; /*make smaller*/
+    padding:10px;
+    padding-left: 1%;
+    justify-content: left;
+
+}

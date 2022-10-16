@@ -6,7 +6,7 @@
 
 .Mugshot {
     aspect-ratio: 5 / 4;
-    background-image: url('../assets/mugs/mugshot_background.png');
+    /* background-image: url('../assets/mugs/mugshot_background.png'); */
     background-size: contain;
     position: relative;
 }

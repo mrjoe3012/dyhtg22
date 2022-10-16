@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import './Card.css';
 import './Map.css';
 
+import GradientBar from "../assets/other/gradient.png"
+
 import Building from './Building';
 
 import mapBackground from '../assets/buildings/map_bottom.png';
@@ -39,23 +41,6 @@ function Map()
         return () => clearInterval(interval);
       }, []);
 
-    var buildingLogs = {
-        "0000": {
-            "Boyd Orr": 20,
-            "The Hive": 34
-        },
-        "0100": {
-            "Boyd Orr": 7,
-            "The Hive": 22
-        }    
-    }
-
-    var buildingImages = {
-        "Boyd Orr": boydOrrImage,
-        "Library": libraryImage,
-        "St Andrews": stAndrewsImage
-    }
-
     // Function to convert number of people to hex value
 
     // On state change, pass hex value to each child through props
@@ -79,6 +64,11 @@ function Map()
                 <Building intensity={0.7} opacity={opacity}  image={jwsImage}></Building>
                 <Building intensity={0.2} opacity={opacity}  image={kelvingroveImage}></Building>
             </div>
+            {/* <div className='heatmap-scale'>
+                <p>Low</p>
+                <img src={GradientBar} className="GradientBar"></img>
+                <p>High</p>
+            </div> */}
         </div>
     );
 }
