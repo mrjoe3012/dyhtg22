@@ -1,3 +1,4 @@
+from array import array
 from io import BytesIO
 import sqlite3
 
@@ -186,23 +187,31 @@ def get_adjacency_matrix_for_suspects(adjacency_matrix, student_ids):
     suspect_adj_matrix = np.take(suspect_adj_matrix, relevant_id_indices, axis=1)
     return suspect_adj_matrix
 
-def get_adjacency_matrix_for_given_student_ids(adjacency_matrix, student_ids, student_ids_to_include):
-    student_id_minus = list(student_ids)
-    indices_for_student_ids_to_include = []
-    for id in student_ids_to_include:
-        student_id_minus.remove(id)
-    for i, student_id_to_include in enumerate(student_id_minus):
-        indices_for_student_ids_to_include.append(student_ids.index(student_id_to_include))
-    indices_for_student_ids_to_include = np.array(indices_for_student_ids_to_include)
-    #print(relevant_id_indices)
-    #print(adjacency_matrix.shape)
-    #print(indices_for_student_ids_to_include.dtype)
-    #np.fill_diagonal(adjacency_matrix, 1)
-    #specific_adj_matrix = np.take(adjacency_matrix, np.where(adjacency_matrix[indices_for_student_ids_to_include] > 0), axis=0)
-    specific_adj_matrix = np.copy(adjacency_matrix)
-    specific_adj_matrix[indices_for_student_ids_to_include,:] = 0
-    #specific_adj_matrix = np.take(specific_adj_matrix, np.where(specific_adj_matrix[indices_for_student_ids_to_include] > 0), axis=1)
-    return specific_adj_matrix
+def get_adjacency_matrix_for_given_student_ids(adjacency_matrix, student_ids, student_ids_to_include, strict=False):
+    if not strict:
+        student_id_minus = list(student_ids)
+        indices_for_student_ids_to_include = []
+        for id in student_ids_to_include:
+            student_id_minus.remove(id)
+        for i, student_id_to_include in enumerate(student_id_minus):
+            indices_for_student_ids_to_include.append(student_ids.index(student_id_to_include))
+        indices_for_student_ids_to_include = np.array(indices_for_student_ids_to_include)
+        #print(relevant_id_indices)
+        #print(adjacency_matrix.shape)
+        #print(indices_for_student_ids_to_include.dtype)
+        #np.fill_diagonal(adjacency_matrix, 1)
+        #specific_adj_matrix = np.take(adjacency_matrix, np.where(adjacency_matrix[indices_for_student_ids_to_include] > 0), axis=0)
+        specific_adj_matrix = np.copy(adjacency_matrix)
+        specific_adj_matrix[indices_for_student_ids_to_include,:] = 0
+        #specific_adj_matrix = np.take(specific_adj_matrix, np.where(specific_adj_matrix[indices_for_student_ids_to_include] > 0), axis=1)
+        return specific_adj_matrix
+    else:
+        indices_for_student_ids_to_include = np.zeros(len(student_ids_to_include), dtype=np.int64)
+        for i,id in enumerate(student_ids_to_include):
+            indices_for_student_ids_to_include[i] = student_ids.index(id)
+        specific_adj_matrix = np.take(adjacency_matrix, indices_for_student_ids_to_include, axis=0)
+        specific_adj_matrix = np.take(specific_adj_matrix, indices_for_student_ids_to_include, axis=1)
+        return specific_adj_matrix
 
 def get_mastermind(adjacency_matrix, student_ids):
     interaction_with_suspects_list = []

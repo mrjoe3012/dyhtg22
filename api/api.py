@@ -1,5 +1,7 @@
+from email.charset import add_alias
 import json
 from numpy import full
+import numpy as np
 
 import Utils
 from flask import Flask, jsonify, Response, request, make_response
@@ -37,22 +39,26 @@ def route_get_interaction_graph():
     args_dict = args.to_dict() #args_dict.get("students")
     #student_filter_list = args_dict["students"].split(",")
     student_ids_to_display = args_dict.get("students").split(",")
+    strict = args["strict"] == "true"
     print(student_ids_to_display)
     full_adjacency_matrix, student_ids = get_meeting_adjacency_matrix(get_security_logs(Utils.DATABASE_FILENAME))
     if len(student_ids_to_display) > 0 and student_ids_to_display[0] != "":
         for student_id in student_ids_to_display:
             if student_id not in student_ids:
                 student_ids_to_display.pop(student_ids_to_display.index(student_id))
-        adjacency_matrix_to_display = get_adjacency_matrix_for_given_student_ids(full_adjacency_matrix, student_ids, student_ids_to_display)
+        adjacency_matrix_to_display = get_adjacency_matrix_for_given_student_ids(full_adjacency_matrix, student_ids, student_ids_to_display, strict)
     else:
         adjacency_matrix_to_display = full_adjacency_matrix
+    if adjacency_matrix_to_display.size <= 1 or np.count_nonzero(adjacency_matrix_to_display) <= 1 or np.count_nonzero(adjacency_matrix_to_display) % 2 != 0:
+        return "x"
     byte_representation = display_graph_from_adjacency_matrix(adjacency_matrix_to_display, student_ids, show=False)
 
-
+    print("hello2")
 
     response = make_response(byte_representation.read())
     response.headers["Content-Type"] = "image/png"
     set_response_headers(response)
+    print("hello3")
     return response
 
     #handle request arguments (parse a comma separated list) if list is empty it means no filter, return all student_ids, if there is any ids that are not real, return nothing
