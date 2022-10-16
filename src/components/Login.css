@@ -1,0 +1,32 @@
+.Login {
+    background-color: #143762;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    padding-bottom: 100px;
+    height: 300px;
+}
+
+.login-card {
+    width: 600px;
+    padding-bottom: 30px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 100px;
+
+}
+
+button {
+    margin: 10px 100px;
+}
